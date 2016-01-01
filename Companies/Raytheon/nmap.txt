@@ -1,0 +1,10 @@
+
+Starting Nmap 6.40 ( http://nmap.org ) at 2015-12-29 00:43 MST
+Nmap scan report for 198.105.254.228
+Host is up (0.064s latency).
+Not shown: 98 filtered ports
+PORT    STATE  SERVICE
+80/tcp  open   http
+443/tcp closed https
+
+Nmap done: 1 IP address (1 host up) scanned in 2.32 seconds
