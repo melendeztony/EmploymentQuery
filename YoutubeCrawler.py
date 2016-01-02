@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from math import floor
 video_minutes = 0
 video_seconds = 0
+video_hours = 0
 
 '''
 The Purpose of this program is to enter a youtube playlist url and check to see the total time it will
@@ -25,7 +26,7 @@ def youtube_time_crawler():
             check_number = title[0]                     # Check the first character in the string for a number
             if is_number(check_number) is True:
                 add_youtube_video_time(title)
-    convert_numbers_to_time(video_minutes, video_seconds)
+    convert_numbers_to_time(video_hours, video_minutes, video_seconds)
 
 '''
 This part of the program takes the first character of a string and determines if it is a number
@@ -47,9 +48,13 @@ in the HH:MM:SS format we must manipulate the string to separate the minutes fro
 
 
 def add_youtube_video_time(video_time):
+    global video_hours
     global video_minutes
     global video_seconds
-    minutes = video_time[:-3]
+    hours = video_time[:-6]
+    if is_number(hours) is True:
+        video_hours += int(hours)
+    minutes = video_time[-5:-3]
     video_minutes += int(minutes)
     seconds = video_time[-2:]
     video_seconds += int(seconds)
@@ -61,12 +66,12 @@ Additionally this method can be used elsewhere to convert minutes and seconds in
 '''
 
 
-def convert_numbers_to_time(minutes, seconds):
+def convert_numbers_to_time(hours, minutes, seconds):
     print(str(minutes) + " minutes")
     print(str(seconds) + " seconds")
     seconds_remainder = floor(seconds % 60)
     total_minutes = minutes + floor(seconds/60)
-    total_hours = floor(total_minutes/60)
+    total_hours = hours + floor(total_minutes/60)
     total_minutes = floor(total_minutes % 60)
 
     print("Total Time is " +
